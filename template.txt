@@ -1,0 +1,16 @@
+dotnet new webapi -o Draft01.Api
+dotnet new classlib -o Draft01.Contracts
+dotnet new classlib -o Draft01.Infrastructure 
+dotnet new classlib -o Draft01.Application
+dotnet new classlib -o Draft01.Domain
+
+
+dotnet sln add $(find . -name '*.csproj')
+
+dotnet add Draft01.Api/ reference Draft01.Contracts Draft01.Application
+
+dotnet add Draft01.Infrastructure/ reference Draft01.Application
+
+dotnet add Draft01.Application/ reference  Draft01.Domain
+
+dotnet add ./Draft01.Api reference ./Draft01.Infrastructure
